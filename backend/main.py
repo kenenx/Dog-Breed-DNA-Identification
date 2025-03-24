@@ -23,7 +23,7 @@ def find_closest_match(reference_sequences, query_file_path):
     aligner = PairwiseAligner()
     aligner.mode = 'global'
     best_match = None
-    best_score = float('-inf').
+    best_score = float('-inf')
 
     # Load query sequences
     query_sequences = []
