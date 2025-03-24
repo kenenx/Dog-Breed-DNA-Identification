@@ -1,15 +1,16 @@
 from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.Align import PairwiseAligner
+from typing import Dict, List, Tuple
 
-def get_breed(header):
+def get_breed(header: str) -> str:
     """Get dog breed from FASTA header."""
     parts = header.split("[breed=")
     if len(parts) > 1:
         return parts[1].split("]")[0]
     return "Unknown"
 
-def load_sequences(file_path):
+def load_sequences(file_path: str) -> Dict[str, List[str]]:
     """Load sequences and store them in a dictionary by breed."""
     sequences = {}
     with open(file_path, "r") as fasta_file:
@@ -18,7 +19,7 @@ def load_sequences(file_path):
             sequences.setdefault(breed, []).append(str(record.seq))
     return sequences
 
-def find_closest_match(reference_sequences, query_file_path):
+def find_closest_match(reference_sequences: Dict[str, List[str]], query_file_path: str) -> Tuple[str, float]:
     """Align query sequences to the reference sequences and return the closest match and difference."""
     aligner = PairwiseAligner()
     aligner.mode = 'global'
