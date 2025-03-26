@@ -27,23 +27,20 @@ def find_closest_match(reference_sequences: Dict[str, List[str]], query_file_pat
     best_score = float('-inf')
 
     # Load query sequences
-    query_sequences = []
-    with open(query_file_path, "r") as fasta_file:
-        for record in SeqIO.parse(fasta_file, "fasta"):
-            query_sequences.append(str(record.seq))
+    query_sequences = load_sequences(query_file_path)
 
     # Align query sequences to reference sequences
-    for query_seq in query_sequences:
-        for breed, sequences in reference_sequences.items():
-            for ref_seq in sequences:
-                alignment = aligner.align(ref_seq, query_seq)
-                score = alignment[0].score
-                print(f"Aligning Mystery to {breed}, score: {score}") # Function crashes if this debug line is removed as the dataset is too big
+    for query_seqs in query_sequences.items():
+        for query_seq in query_seqs:
+            for breed, sequences in reference_sequences.items():
+                for ref_seq in sequences:
+                    alignment = aligner.align(ref_seq, query_seq)
+                    score = alignment[0].score
+                    print(f"Aligning Mystery to {breed}, score: {score}")
 
-                if score > best_score:
-                    best_score = score
-                    best_match = (breed, ref_seq)
-
+                    if score > best_score:
+                        best_score = score
+                        best_match = (breed, ref_seq)
 
     return best_match, best_score
 
