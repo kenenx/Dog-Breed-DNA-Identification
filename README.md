@@ -30,7 +30,7 @@ pip install -r requirements.txt
    ```sh
    python src/main.py
    ```
-4. The output will display the top 6 matching breeds in a table format.
+4. The output will display the top 10 matching breeds in a table format.
 
 ### Web Interface
 1. Place the reference DNA sequences in `data/dog_breeds.fa`.
@@ -43,7 +43,7 @@ pip install -r requirements.txt
 5. Enter the file paths for the reference and query DNA sequences (default paths are pre-filled).
 6. Click "Submit" to start the alignment process.
 7. A loading page will display the progress of the alignment, including console messages such as alignment scores.
-8. Once the alignment is complete, the results page will display the top 6 matching breeds, their probabilities, and alignment scores.
+8. Once the alignment is complete, the results page will display the top 10 matching breeds, their probabilities, and alignment scores.
 
 ## Example Output (Web Interface)
 
