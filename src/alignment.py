@@ -28,13 +28,18 @@ def calculate_probabilities(scores: Dict[str, float]) -> Dict[str, float]:
 
     return probabilities
 
-def find_closest_match(reference_sequences: Dict[str, List[str]], query_sequences: Dict[str, List[str]]) -> Tuple[str, float, Dict[str, float], Dict[str, float]]:
+def find_closest_match(
+    reference_sequences: Dict[str, List[str]],
+    query_sequences: Dict[str, List[str]],
+    log_callback=None
+) -> Tuple[str, float, Dict[str, float], Dict[str, float]]:
     """
     Align query sequences to the reference sequences and return the closest match, probabilities, and scores.
 
     Args:
         reference_sequences (Dict[str, List[str]]): A dictionary where keys are breed names and values are lists of DNA sequences.
         query_sequences (Dict[str, List[str]]): A dictionary where keys are query names and values are lists of DNA sequences.
+        log_callback (callable, optional): A function to log messages. Defaults to None.
 
     Returns:
         Tuple[str, float, Dict[str, float], Dict[str, float]]:
@@ -68,7 +73,8 @@ def find_closest_match(reference_sequences: Dict[str, List[str]], query_sequence
             for ref_seq in sequences:
                 alignment = aligner.align(ref_seq, query_seq)
                 score = alignment[0].score
-                print(f"Aligning Mystery to {breed}, score: {score}")
+                if log_callback:
+                    log_callback(f"Aligning Mystery to {breed}, score: {score}")
 
                 local_scores[breed] = max(local_scores.get(breed, float('-inf')), score)
                 if score > local_best_score:

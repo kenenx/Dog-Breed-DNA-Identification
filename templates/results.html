@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+</head>
+<body>
+    <h1>Alignment Results</h1>
+    <p><strong>Best Match:</strong> {{ best_match }}</p>
+    <p><strong>Best Alignment Score:</strong> {{ best_score }}</p>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Breed</th>
+                <th>Probability</th>
+                <th>Alignment Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results[:10] %}
+            <tr>
+                <td>{{ result.breed }}</td>
+                <td>{{ result.probability }}</td>
+                <td>{{ result.score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="/">Go Back</a>
+</body>
+</html>

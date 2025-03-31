@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <script>
+        // Poll the server for console output updates
+        function fetchConsoleOutput() {
+            fetch("/console_output")
+                .then(response => response.json())
+                .then(data => {
+                    const consoleDiv = document.getElementById("console");
+                    consoleDiv.innerHTML = data.output.join("<br>");
+                    if (!data.complete) {
+                        setTimeout(fetchConsoleOutput, 1000); 
+                    } else {
+                        window.location.href = "/results"; // Redirect to results page
+                    }
+                });
+        }
+
+        window.onload = fetchConsoleOutput;
+    </script>
+</head>
+<body>
+    <h1>Processing...</h1>
+    <div id="console" style="font-family: monospace; white-space: pre-wrap;"></div>
+</body>
+</html>

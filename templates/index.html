@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Breed DNA Identification</title>
+</head>
+<body>
+    <h1>Dog Breed DNA Identification</h1>
+    <form method="POST">
+        <label for="reference_file">Reference File Path:</label>
+        <input type="text" id="reference_file" name="reference_file" value="data/dog_breeds.fa" required>
+        <br><br>
+        <label for="query_file">Query File Path:</label>
+        <input type="text" id="query_file" name="query_file" value="data/mystery.fa" required>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
